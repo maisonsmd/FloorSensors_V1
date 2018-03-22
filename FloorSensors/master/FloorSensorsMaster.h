@@ -8,7 +8,6 @@
 #else
 #include "WProgram.h"
 #endif
-#include "DataGroup.h"
 
 //#define DEBUG	Serial
 
@@ -29,6 +28,7 @@
 #define TIME_OUT 100
 
 #define API_BAUD	115200
+#define NOT_FOUND	255.0
 
 #define FL	0
 #define FC	1
@@ -47,17 +47,13 @@ class FloorSensorsMaster
 {
 protected:
 	Stream * port;
-	DataContainerClass api_container;
-	uint8_t api_group_idx;
-	//data index in data container
-	uint8_t api_prox_data_idx[6];
-	uint8_t api_analog_data_idx[14];	//7 front + 7 back
 
 	//sensors value
-	uint8_t api_prox_state[6];
-	uint8_t api_analog_state[14]; 
 	boolean api_is_busy = false;
 	uint32_t api_request_tick = 0;
+	uint8_t api_prox_values = 0;
+	uint8_t api_side_analog_values = 0;
+	uint8_t api_back_analog_values = 0;
 
 	uint8_t color = RED;
 
@@ -83,8 +79,10 @@ public:
 	void init(Stream * _port);
 	void run();
 	uint8_t getProxityState(uint8_t name);
-	uint8_t getFrontAnalogState(uint8_t index);
+	uint8_t getSideAnalogState(uint8_t index);
 	uint8_t getBackAnalogState(uint8_t index);
+	float getSideOffset(void);
+	float getBackOffset(void);
 	//float getAngle();
 	//float getOffset();
 	void setColor(uint8_t _color);

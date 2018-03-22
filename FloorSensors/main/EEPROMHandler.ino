@@ -5,64 +5,64 @@ void readEEPROM()
 	uint16_t currentIdx = 0;
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].red.upper);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].red.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].red.lower);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].red.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].blue.upper);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].blue.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].blue.lower);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].blue.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].white.upper);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].white.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].white.upper);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].white.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	///////////////////
 
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].red.upper);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].red.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].red.lower);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].red.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].blue.upper);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].blue.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].blue.lower);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].blue.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].white.upper);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].white.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].white.upper);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].white.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	setColor(RED);
@@ -75,64 +75,64 @@ void readEEPROM_backup()
 	uint16_t currentIdx = 200;
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].red.upper);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].red.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].red.lower);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].red.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].blue.upper);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].blue.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].blue.lower);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].blue.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].white.upper);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].white.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.front_threshold[i].white.upper);
+		EEPROM.read(currentIdx, &Floor.side_threshold[i].white.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	///////////////////
 
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].red.upper);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].red.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].red.lower);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].red.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].blue.upper);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].blue.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].blue.lower);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].blue.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].white.upper);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].white.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.read(currentIdx, &Floor.back_threshold[i].white.upper);
+		EEPROM.read(currentIdx, &Floor.back_threshold[i].white.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	setColor(BLUE);
@@ -145,64 +145,64 @@ void saveEEPROM()
 	uint16_t currentIdx = 0;
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].red.upper);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].red.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].red.lower);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].red.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].blue.upper);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].blue.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].blue.lower);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].blue.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].white.upper);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].white.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].white.upper);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].white.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	///////////////////
 
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].red.upper);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].red.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].red.lower);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].red.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].blue.upper);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].blue.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].blue.lower);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].blue.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].white.upper);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].white.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].white.upper);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].white.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	LOG("SAVE EPPROM DONE, TOTAL ");
@@ -214,64 +214,64 @@ void saveEEPROM_backup()
 	uint16_t currentIdx = 200;
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].red.upper);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].red.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].red.lower);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].red.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].blue.upper);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].blue.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].blue.lower);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].blue.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].white.upper);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].white.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.front_threshold[i].white.upper);
+		EEPROM.write(currentIdx, Floor.side_threshold[i].white.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	///////////////////
 
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].red.upper);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].red.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].red.lower);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].red.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].blue.upper);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].blue.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].blue.lower);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].blue.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].white.upper);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].white.background);
 		currentIdx += sizeof(uint16_t);
 	}
 	for (uint8_t i = 0; i < 7; i++)
 	{
-		EEPROM.write(currentIdx, Floor.back_threshold[i].white.upper);
+		EEPROM.write(currentIdx, Floor.back_threshold[i].white.line);
 		currentIdx += sizeof(uint16_t);
 	}
 	LOG("SAVE BACKUP DONE, TOTAL ");

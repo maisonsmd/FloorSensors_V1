@@ -21,17 +21,11 @@
     <ClInclude Include="__vm\.master.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\main\DataGroup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FloorSensorsMaster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\main\DataGroup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FloorSensorsMaster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

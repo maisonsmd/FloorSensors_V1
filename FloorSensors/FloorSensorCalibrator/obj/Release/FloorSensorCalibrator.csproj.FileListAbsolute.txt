@@ -1,0 +1,9 @@
+C:\Users\PC\Documents\Arduino\FloorSensors\FloorSensorCalibrator\bin\Release\FloorSensorCalibrator.exe.config
+C:\Users\PC\Documents\Arduino\FloorSensors\FloorSensorCalibrator\bin\Release\FloorSensorCalibrator.exe
+C:\Users\PC\Documents\Arduino\FloorSensors\FloorSensorCalibrator\bin\Release\FloorSensorCalibrator.pdb
+C:\Users\PC\Documents\Arduino\FloorSensors\FloorSensorCalibrator\obj\Release\FloorSensorCalibrator.csprojResolveAssemblyReference.cache
+C:\Users\PC\Documents\Arduino\FloorSensors\FloorSensorCalibrator\obj\Release\FloorSensorCalibrator.Form1.resources
+C:\Users\PC\Documents\Arduino\FloorSensors\FloorSensorCalibrator\obj\Release\FloorSensorCalibrator.Properties.Resources.resources
+C:\Users\PC\Documents\Arduino\FloorSensors\FloorSensorCalibrator\obj\Release\FloorSensorCalibrator.csproj.GenerateResource.Cache
+C:\Users\PC\Documents\Arduino\FloorSensors\FloorSensorCalibrator\obj\Release\FloorSensorCalibrator.exe
+C:\Users\PC\Documents\Arduino\FloorSensors\FloorSensorCalibrator\obj\Release\FloorSensorCalibrator.pdb

@@ -26,10 +26,8 @@
 #define BLUE	2
 #define WHITE	3
 DataContainerClass ms_container;
-DataContainerClass api_container;
 
 uint8_t ms_group_idx;
-uint8_t api_group_idx;
 
 //local sensor pin
 uint8_t local_analog_pin[7] = { PA0,PA1,PA2, PA3, PA4, PA5, PA6 };
@@ -37,12 +35,9 @@ uint8_t local_analog_pin[7] = { PA0,PA1,PA2, PA3, PA4, PA5, PA6 };
 //data index in data container
 uint8_t ms_prox_data_idx[6];
 uint8_t ms_analog_data_idx[7];
-uint8_t api_prox_data_idx[6];
-uint8_t api_analog_data_idx[14];	//7 front + 7 back
-
-/*//sensors data index
-uint8_t ms_analog_idx[7];
-uint8_t ms_prox_idx[7];*/
+uint8_t api_prox_values;
+uint8_t api_side_analog_values;
+uint8_t api_back_analog_values;
 
 //sensors value
 uint8_t ms_prox_val[7];
@@ -60,9 +55,8 @@ void setup()
 {
 	API_PORT.begin(57600);
 	MS_PORT.begin(250000);
-	DEBUG_PORT.begin(250000);
+	DEBUG_PORT.begin(115200);
 	DEBUG_PORT.setTimeout(100);
-
 	pinMode(LED, OUTPUT);
 	pinMode(COLOR_RED_PIN, OUTPUT);
 	pinMode(COLOR_GREEN_PIN, OUTPUT);
@@ -74,7 +68,6 @@ void setup()
 	}
 
 	ms_group_idx = ms_container.AddGroup();
-	api_group_idx = api_container.AddGroup();
 
 	for (uint8_t i = 0; i < 6; i++)
 	{
@@ -83,19 +76,6 @@ void setup()
 	for (uint8_t i = 0; i < 7; i++)
 	{
 		ms_analog_data_idx[i] = ms_container.GetDataGroup(ms_group_idx)->AddAddress<uint16_t>();
-	}
-
-	for (uint8_t i = 0; i < 6; i++)
-	{
-		api_prox_data_idx[i] = api_container.GetDataGroup(api_group_idx)->AddAddress<uint8_t>();
-	}
-	for (uint8_t i = 0; i < 7; i++)
-	{
-		api_analog_data_idx[i] = api_container.GetDataGroup(api_group_idx)->AddAddress<uint8_t>();
-	}
-	for (uint8_t i = 0; i < 7; i++)
-	{
-		api_analog_data_idx[i + 7] = api_container.GetDataGroup(api_group_idx)->AddAddress<uint8_t>();
 	}
 
 	setColor(BLUE);
@@ -157,17 +137,24 @@ void requestFromSlave()
 
 void handleAPI()
 {
-	//API_PORT.println(millis());
-	for (uint8_t i = 0; i < 3; i++)
+	api_prox_values = 0;
+	api_back_analog_values = 0;
+	api_side_analog_values = 0;
+	for(uint8_t i = 0; i < 3; i++)
 	{
-		api_container.GetDataGroup(api_group_idx)->SetValue<uint8_t>(api_prox_data_idx[i], Floor.front_prox_sensor[i].getState());
-		api_container.GetDataGroup(api_group_idx)->SetValue<uint8_t>(api_prox_data_idx[i + 3], Floor.side_prox_sensor[i].getState());
-	}	
-	for (uint8_t i = 0; i < 7; i++)
-	{
-		api_container.GetDataGroup(api_group_idx)->SetValue<uint8_t>(api_analog_data_idx[i], Floor.front_analog_sensor[i].getState());
-		api_container.GetDataGroup(api_group_idx)->SetValue<uint8_t>(api_analog_data_idx[i + 7], Floor.back_analog_sensor[i].getState());
+		if (Floor.front_prox_sensor[i].getState() == 1)
+			bitSet(api_prox_values, i);
+		if (Floor.side_prox_sensor[i].getState() == 1)
+			bitSet(api_prox_values, i + 3);
 	}
+	for(uint8_t i = 0; i < 7; i++)
+	{
+		if (Floor.side_analog_sensor[i].getState() == 1)
+			bitSet(api_side_analog_values, i);
+		if (Floor.back_analog_sensor[i].getState() == 1)
+			bitSet(api_back_analog_values, i);
+	}
+
 	if (!API_PORT.available())
 		return;
 	String indata = "";
@@ -180,26 +167,23 @@ void handleAPI()
 	//requesting
 	if (indata.indexOf("RQ") >= 0)
 	{
-		for (uint8_t i = 0; i < PACKAGE_SIZE; i++)
-			API_PORT.write(api_container.GetDataGroup(api_group_idx)->GetBytes()[i]);
-		//API_PORT.println(millis());
+		API_PORT.write(api_prox_values);
+		API_PORT.write(api_side_analog_values);
+		API_PORT.write(api_back_analog_values);
 	}
 	if (indata.indexOf("SR") >= 0)
 	{
-		LOGLN("RED");
 		setColor(RED);
 	}
 	if (indata.indexOf("SB") >= 0)
 	{
-		LOGLN("BLUE");
 		setColor(BLUE);
 	}
 	if (indata.indexOf("SW") >= 0)
 	{
-		LOGLN("WHITE");
 		setColor(WHITE);
 	}
-	//this secsion just to blink LED, don't care
+	//this secsion just to blink the LED, don't care
 	static uint32_t timer_blink = 0;
 	static uint8_t current_duration = 0;
 	static uint32_t blink_duration = 0;
@@ -313,17 +297,20 @@ void api_waitByte()
 
 void setColor(uint8_t c)
 {
+	static uint8_t lastColor = 255;
 	switch (c)
 	{
 	case RED:
-		digitalWrite(COLOR_RED_PIN, HIGH);
-		digitalWrite(COLOR_GREEN_PIN, LOW);
+		digitalWrite(COLOR_RED_PIN, LOW);
+		digitalWrite(COLOR_GREEN_PIN, HIGH);
 		digitalWrite(COLOR_BLUE_PIN, LOW);
 		for (uint8_t i = 0; i < 7; i++)
 		{
-			Floor.front_analog_sensor[i].setThreshold(Floor.front_threshold[i].red);
+			Floor.side_analog_sensor[i].setThreshold(Floor.side_threshold[i].red);
 			Floor.back_analog_sensor[i].setThreshold(Floor.back_threshold[i].red);
 		}
+		if (lastColor != RED)
+			LOGLN("COL: RED");
 		break;
 	case WHITE:
 		digitalWrite(COLOR_RED_PIN, HIGH);
@@ -331,19 +318,24 @@ void setColor(uint8_t c)
 		digitalWrite(COLOR_BLUE_PIN, LOW);
 		for (uint8_t i = 0; i < 7; i++)
 		{
-			Floor.front_analog_sensor[i].setThreshold(Floor.front_threshold[i].white);
+			Floor.side_analog_sensor[i].setThreshold(Floor.side_threshold[i].white);
 			Floor.back_analog_sensor[i].setThreshold(Floor.back_threshold[i].white);
 		}
+		if (lastColor != WHITE)
+			LOGLN("COL: WHITE");
 		break;
 	case BLUE:
 		digitalWrite(COLOR_RED_PIN, LOW);
-		digitalWrite(COLOR_GREEN_PIN, LOW);
-		digitalWrite(COLOR_BLUE_PIN, HIGH);
+		digitalWrite(COLOR_GREEN_PIN, HIGH);
+		digitalWrite(COLOR_BLUE_PIN, LOW);
 		for (uint8_t i = 0; i < 7; i++)
 		{
-			Floor.front_analog_sensor[i].setThreshold(Floor.front_threshold[i].blue);
+			Floor.side_analog_sensor[i].setThreshold(Floor.side_threshold[i].blue);
 			Floor.back_analog_sensor[i].setThreshold(Floor.back_threshold[i].blue);
 		}
+		if (lastColor != BLUE)
+			LOGLN("COL: BLUE");
 		break;
 	}
+	lastColor = c;
 }

@@ -14,8 +14,8 @@
 
 struct Threshold	//hold the analog threshold to decide which color is.
 {
-	uint16_t upper;
-	uint16_t lower;
+	uint16_t background;
+	uint16_t line;
 };
 
 struct ColorThresholds
@@ -48,13 +48,13 @@ private:
 	uint32_t tmr_debounce;
 	uint8_t current_state;
 	uint8_t last_state;
-	uint16_t average_val;
+	//uint16_t average_val;
 public:
 	void run();
 	void setRawVal(uint16_t * _raw_val);
 	void setThreshold(Threshold th);
 	uint16_t getRawVal(void);
-	uint16_t getAverageVal(void);
+	//uint16_t getAverageVal(void);
 	uint8_t getState(void);
 };
 

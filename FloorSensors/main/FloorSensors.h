@@ -28,17 +28,17 @@ private:
 	void readSensors();
 public:
 	//thresholds for colors
-	ColorThresholds front_threshold[7];
+	ColorThresholds side_threshold[7];
 	ColorThresholds back_threshold[7];
 
 	ProximitySensor front_prox_sensor[3];
 	ProximitySensor side_prox_sensor[3];
 
-	AnalogSensor front_analog_sensor[7];
+	AnalogSensor side_analog_sensor[7];
 	AnalogSensor back_analog_sensor[7];
 
 	FloorSensorsClass(uint8_t * _prox_val_array, 
-		uint16_t * _front_analog_val_array,
+		uint16_t * _side_analog_val_array,
 		uint16_t * _back_analog_val_array);
 	void run();
 };

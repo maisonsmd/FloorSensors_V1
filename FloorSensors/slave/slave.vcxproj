@@ -60,10 +60,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\slave;$(ProjectDir)..\..\..\..\..\..\Program Files (x86)\Arduino\libraries;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\libraries;$(ProjectDir)..\..\libraries;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\cores\maple;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\cores\maple\avr;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\cores\maple\libmaple;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\cores\maple\stm32f1;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\variants\generic_stm32f103c;$(ProjectDir)..\main;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\system\libmaple;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\system\libmaple\include;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\system\libmaple\stm32f1\include;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\system\libmaple\usb\stm32f1;$(ProjectDir)..\..\hardware\Arduino_STM32\STM32F1\system\libmaple\usb\usb_lib;$(ProjectDir)..\..\hardware\Arduino_STM32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.slave.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>DEBUG_LEVEL=DEBUG_NONE;BOARD_generic_stm32f103c;VECT_TAB_ADDR=0x8002000;ERROR_LED_PORT=GPIOC;ERROR_LED_PIN=13;F_CPU=72000000L;ARDUINO=10805;ARDUINO_GENERIC_STM32F103C;ARDUINO_ARCH_STM32F1;SERIAL_USB;GENERIC_BOOTLOADER;MCU_STM32F103CB;__STM32F1__;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

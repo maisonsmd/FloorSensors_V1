@@ -43,13 +43,13 @@ void FloorSensorsMaster::waitForSlave(void)
 	}
 	//new data comes
 	api_is_busy = false;
-	byte data[PACKAGE_SIZE];
+	byte data[3];
 	uint8_t count = 0;
 	//read data from slave
 	//LOG("[");
 	while (port->available())
 	{
-		if (count > PACKAGE_SIZE)
+		if (count >= 3)
 		{
 			LOGLN("MS BUFFER OVERFLOWS");
 			//flush buffer
@@ -63,41 +63,14 @@ void FloorSensorsMaster::waitForSlave(void)
 		api_waitByte();
 	}
 	//LOGLN("]");
-	api_container.GetDataGroup(api_group_idx)->SetBytes(data);
-	//parse data
-	for (uint8_t i = 0; i < 6; i++)
-	{
-		api_prox_state[i] = api_container.GetDataGroup(api_group_idx)->GetValue<uint8_t>(api_prox_data_idx[i]);
-		//LOG(api_prox_state[i]);
-		//LOG(',');
-	}
-	for (uint8_t i = 0; i < 7; i++)
-	{
-		api_analog_state[i] = api_container.GetDataGroup(api_group_idx)->GetValue<uint16_t>(api_analog_data_idx[i]);
-		api_analog_state[7+i] = api_container.GetDataGroup(api_group_idx)->GetValue<uint16_t>(api_analog_data_idx[7+i]);
-		//LOG(api_analog_state[i]);
-		//LOG('\t');
-	}
-	//LOGLN("");
+	api_prox_values = data[0];
+	api_side_analog_values = data[1];
+	api_back_analog_values = data[2];
 }
 
 void FloorSensorsMaster::init(Stream * _port)
 {
 	port = _port;
-	//port->begin(API_BAUD);
-	api_group_idx = api_container.AddGroup();
-	for (uint8_t i = 0; i < 6; i++)
-	{
-		api_prox_data_idx[i] = api_container.GetDataGroup(api_group_idx)->AddAddress<uint8_t>();
-	}
-	for (uint8_t i = 0; i < 7; i++)
-	{
-		api_analog_data_idx[i] = api_container.GetDataGroup(api_group_idx)->AddAddress<uint8_t>();
-	}
-	for (uint8_t i = 0; i < 7; i++)
-	{
-		api_analog_data_idx[i + 7] = api_container.GetDataGroup(api_group_idx)->AddAddress<uint8_t>();
-	}
 }
 
 void FloorSensorsMaster::run()
@@ -114,17 +87,71 @@ void FloorSensorsMaster::run()
 
 uint8_t FloorSensorsMaster::getProxityState(uint8_t name)
 {
-	return api_prox_state[name];
+	return bitRead(api_prox_values, name);
 }
 
-uint8_t FloorSensorsMaster::getFrontAnalogState(uint8_t index)
+uint8_t FloorSensorsMaster::getSideAnalogState(uint8_t index)
 {
-	return api_analog_state[index];
+	return bitRead(api_side_analog_values, index);;
 }
 
 uint8_t FloorSensorsMaster::getBackAnalogState(uint8_t index)
 {
-	return (api_analog_state + 7)[index];
+	return bitRead(api_back_analog_values, index);;
+}
+
+float FloorSensorsMaster::getSideOffset()
+{
+	float offset_LTR = 0;
+	float offset_RTL = 0;
+	if (api_side_analog_values == 0xFF)
+		return 0;
+	if (api_side_analog_values == 0x00)
+		return NOT_FOUND;
+	for (uint8_t i = 0; i < 7; i++)
+	{
+		if (getSideAnalogState(i) == 1)
+		{
+			offset_LTR = float(i - 3);
+			break;
+		}
+	}
+	for (int8_t i = 6; i >= 0; i--)
+	{
+		if (getSideAnalogState(i) == 1)
+		{
+			offset_RTL = float(i - 3);
+			break;
+		}
+	}
+	return (offset_LTR + offset_RTL) / -2.0f;
+}
+
+float FloorSensorsMaster::getBackOffset()
+{
+	float offset_LTR = 0;
+	float offset_RTL = 0;
+	if (api_back_analog_values == 0xFF)
+		return 0;
+	if (api_back_analog_values == 0x00)
+		return NOT_FOUND;
+	for (uint8_t i = 0; i < 7; i++)
+	{
+		if (getBackAnalogState(i) == 1)
+		{
+			offset_LTR = float(i - 3);
+			break;
+		}
+	}
+	for (int8_t i = 6; i >= 0; i--)
+	{
+		if (getBackAnalogState(i) == 1)
+		{
+			offset_RTL = float(i - 3);
+			break;
+		}
+	}
+	return (offset_LTR + offset_RTL) / -2.0f;
 }
 
 void FloorSensorsMaster::setColor(uint8_t _color)
