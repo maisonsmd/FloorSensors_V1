@@ -34,6 +34,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnFL = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblSideOffset = new System.Windows.Forms.Label();
+            this.lblBackOffset = new System.Windows.Forms.Label();
             this.btnB3 = new System.Windows.Forms.Button();
             this.btnB6 = new System.Windows.Forms.Button();
             this.btnB5 = new System.Windows.Forms.Button();
@@ -148,8 +150,8 @@
             this.lblCurrentF4 = new System.Windows.Forms.Label();
             this.lblCurrentF6 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.lblSideOffset = new System.Windows.Forms.Label();
-            this.lblBackOffset = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbF0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbF1)).BeginInit();
@@ -241,6 +243,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(220, 217);
             this.panel1.TabIndex = 8;
+            // 
+            // lblSideOffset
+            // 
+            this.lblSideOffset.AutoSize = true;
+            this.lblSideOffset.BackColor = System.Drawing.Color.LightGray;
+            this.lblSideOffset.Location = new System.Drawing.Point(135, 92);
+            this.lblSideOffset.Name = "lblSideOffset";
+            this.lblSideOffset.Size = new System.Drawing.Size(21, 23);
+            this.lblSideOffset.TabIndex = 12;
+            this.lblSideOffset.Text = "l";
+            // 
+            // lblBackOffset
+            // 
+            this.lblBackOffset.AutoSize = true;
+            this.lblBackOffset.BackColor = System.Drawing.Color.LightGray;
+            this.lblBackOffset.Location = new System.Drawing.Point(98, 140);
+            this.lblBackOffset.Name = "lblBackOffset";
+            this.lblBackOffset.Size = new System.Drawing.Size(21, 23);
+            this.lblBackOffset.TabIndex = 13;
+            this.lblBackOffset.Text = "l";
             // 
             // btnB3
             // 
@@ -1248,7 +1270,7 @@
             this.groupBox3.Size = new System.Drawing.Size(348, 102);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "FRONT";
+            this.groupBox3.Text = "SIDE";
             // 
             // button8
             // 
@@ -1356,6 +1378,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.lblInfo);
             this.groupBox2.Controls.Add(this.btnSignal);
             this.groupBox2.Controls.Add(this.tbF5);
@@ -1518,25 +1542,23 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // lblSideOffset
+            // label4
             // 
-            this.lblSideOffset.AutoSize = true;
-            this.lblSideOffset.BackColor = System.Drawing.Color.LightGray;
-            this.lblSideOffset.Location = new System.Drawing.Point(135, 92);
-            this.lblSideOffset.Name = "lblSideOffset";
-            this.lblSideOffset.Size = new System.Drawing.Size(21, 23);
-            this.lblSideOffset.TabIndex = 12;
-            this.lblSideOffset.Text = "l";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(-4, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 23);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "side";
             // 
-            // lblBackOffset
+            // label5
             // 
-            this.lblBackOffset.AutoSize = true;
-            this.lblBackOffset.BackColor = System.Drawing.Color.LightGray;
-            this.lblBackOffset.Location = new System.Drawing.Point(98, 140);
-            this.lblBackOffset.Name = "lblBackOffset";
-            this.lblBackOffset.Size = new System.Drawing.Size(21, 23);
-            this.lblBackOffset.TabIndex = 13;
-            this.lblBackOffset.Text = "l";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(2, 251);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 23);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "back";
             // 
             // Form1
             // 
@@ -1704,6 +1726,8 @@
         private System.Windows.Forms.FlowLayoutPanel lineFullBack;
         private System.Windows.Forms.Label lblSideOffset;
         private System.Windows.Forms.Label lblBackOffset;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }
 

@@ -9,21 +9,21 @@
 #include "WProgram.h"
 #endif
 
-//#define DEBUG	Serial
+//#define LOGGER	Serial
 
-#ifdef DEBUG
-#define LOG(x)		DEBUG.print(x)
-#define LOGHEX(x)	DEBUG.print(x, HEX)
-#define LOGLN(x)	DEBUG.println(x)
-#define LOGF(x)		DEBUG.print(F(x))
-#define LOGLNF(x)	DEBUG.println(F(x))
+#ifdef LOGGER
+#define LOG(x)		LOGGER.print(x)
+#define LOGHEX(x)	LOGGER.print(x, HEX)
+#define LOGLN(x)	LOGGER.println(x)
+#define LOGF(x)		LOGGER.print(F(x))
+#define LOGLNF(x)	LOGGER.println(F(x))
 #else
 #define LOG(x)		
 #define LOGHEX(x)	
 #define LOGLN(x)	
 #define LOGF(x)		
 #define LOGLNF(x)
-#endif // DEBUG
+#endif // LOGGER
 
 #define TIME_OUT 100
 
@@ -45,7 +45,7 @@
 
 class FloorSensorsMaster
 {
-protected:
+public:
 	Stream * port;
 
 	//sensors value
@@ -78,7 +78,7 @@ protected:
 public:
 	void init(Stream * _port);
 	void run();
-	uint8_t getProxityState(uint8_t name);
+	uint8_t getProximityState(uint8_t name);
 	uint8_t getSideAnalogState(uint8_t index);
 	uint8_t getBackAnalogState(uint8_t index);
 	float getSideOffset(void);

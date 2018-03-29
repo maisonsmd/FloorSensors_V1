@@ -262,14 +262,18 @@ namespace FloorSensorCalibrator
                 Boolean isNotFound = true;
                 for (int index = 0; index < 7; index++)
                 {
+                    if (val[index] == 0)
+                        isFullLine = false;
+                }
+
+                for (int index = 0; index < 7; index++)
+                {
                     if (val[index] == 1)
                     {
                         offset_LTR = (index - 3);
                         isNotFound = false;
                         break;
                     }
-                    else
-                        isFullLine = false;
                 }
                 for (int index = 6; index >= 0; index--)
                 {
@@ -279,8 +283,6 @@ namespace FloorSensorCalibrator
                         isNotFound = false;
                         break;
                     }
-                    else
-                        isFullLine = false;
                 }
                 float loc = (offset_LTR + offset_RTL) / -2.0f;
                 if (isFullLine)
@@ -330,14 +332,17 @@ namespace FloorSensorCalibrator
                 Boolean isNotFound = true;
                 for (int index = 0; index < 7; index++)
                 {
+                    if (val[index] == 0)
+                        isFullLine = false;
+                }
+                for (int index = 0; index < 7; index++)
+                {
                     if (val[index] == 1)
                     {
                         offset_LTR = (index - 3);
                         isNotFound = false;
                         break;
                     }
-                    else
-                        isFullLine = false;
                 }
                 for (int index = 6; index >= 0; index--)
                 {
@@ -347,8 +352,6 @@ namespace FloorSensorCalibrator
                         isNotFound = false;
                         break;
                     }
-                    else
-                        isFullLine = false;
                 }
                 float loc = (offset_LTR + offset_RTL) / -2.0f;
                 if (isFullLine)

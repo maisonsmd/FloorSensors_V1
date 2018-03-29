@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "slave", "slave\slave.vcxpro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloorSensorCalibrator", "FloorSensorCalibrator\FloorSensorCalibrator.csproj", "{4CC1E32B-7D08-41F7-8F51-2CDEB8E1076D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "viewer", "viewer\viewer.vcxproj", "{9FDC4781-62C5-4F98-8DD2-7843223BDB20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,12 @@ Global
 		{4CC1E32B-7D08-41F7-8F51-2CDEB8E1076D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4CC1E32B-7D08-41F7-8F51-2CDEB8E1076D}.Release|x86.ActiveCfg = Release|Any CPU
 		{4CC1E32B-7D08-41F7-8F51-2CDEB8E1076D}.Release|x86.Build.0 = Release|Any CPU
+		{9FDC4781-62C5-4F98-8DD2-7843223BDB20}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{9FDC4781-62C5-4F98-8DD2-7843223BDB20}.Debug|x86.ActiveCfg = Debug|Win32
+		{9FDC4781-62C5-4F98-8DD2-7843223BDB20}.Debug|x86.Build.0 = Debug|Win32
+		{9FDC4781-62C5-4F98-8DD2-7843223BDB20}.Release|Any CPU.ActiveCfg = Release|Win32
+		{9FDC4781-62C5-4F98-8DD2-7843223BDB20}.Release|x86.ActiveCfg = Release|Win32
+		{9FDC4781-62C5-4F98-8DD2-7843223BDB20}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

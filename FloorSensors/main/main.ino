@@ -53,7 +53,7 @@ boolean is_debugger_conneced = false;
 
 void setup()
 {
-	API_PORT.begin(57600);
+	API_PORT.begin(115200);
 	MS_PORT.begin(250000);
 	DEBUG_PORT.begin(115200);
 	DEBUG_PORT.setTimeout(100);

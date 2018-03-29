@@ -85,7 +85,7 @@ void FloorSensorsMaster::run()
 	waitForSlave();
 }
 
-uint8_t FloorSensorsMaster::getProxityState(uint8_t name)
+uint8_t FloorSensorsMaster::getProximityState(uint8_t name)
 {
 	return bitRead(api_prox_values, name);
 }
@@ -104,7 +104,8 @@ float FloorSensorsMaster::getSideOffset()
 {
 	float offset_LTR = 0;
 	float offset_RTL = 0;
-	if (api_side_analog_values == 0xFF)
+	//full line
+	if (api_side_analog_values == 127)
 		return 0;
 	if (api_side_analog_values == 0x00)
 		return NOT_FOUND;
