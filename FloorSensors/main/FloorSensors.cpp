@@ -4,7 +4,7 @@
 
 #include "FloorSensors.h"
 
-void FloorSensorsClass::readSensors()
+/*void FloorSensorsClass::readSensors()
 {
 	/*for (uint8_t i = 0; i < 3; i++)
 	{
@@ -17,7 +17,7 @@ void FloorSensorsClass::readSensors()
 		Serial.print(side_prox_sensor[i].getState());
 		Serial.print('\t');
 		//Serial.println(side_analog_sensor[0].getState());
-	}*/
+	}* /
 	for (uint8_t i = 0; i < 7; i++)
 	{
 		Serial.print(side_analog_sensor[i].getRawVal());
@@ -29,7 +29,7 @@ void FloorSensorsClass::readSensors()
 		Serial.print('\t');
 	}
 	Serial.println();
-}
+}*/
 
 FloorSensorsClass::FloorSensorsClass(uint8_t * _prox_val_array, uint16_t * _side_analog_val_array, uint16_t * _back_analog_val_array)
 {

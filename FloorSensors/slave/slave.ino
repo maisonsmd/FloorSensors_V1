@@ -38,6 +38,7 @@ void setup()
 {
 	DEBUG_PORT.begin(115200);
 	MS_PORT.begin(250000);
+	MS_PORT.setTimeout(5);
 	pinMode(LED, OUTPUT);
 
 	ms_group_idx = ms_container.AddGroup();
@@ -74,7 +75,7 @@ void waitCommand()
 	if (!MS_PORT.available())
 		return;
 	LOGLN("");
-	while (MS_PORT.available())
+	/*while (MS_PORT.available())
 	{
 		//LOGHEX(MS_PORT.read());
 		//LOG(",");
@@ -91,7 +92,8 @@ void waitCommand()
 		//LOG(',');
 		count++;
 		waitByte();
-	}
+	}*/
+	MS_PORT.readBytes(data, sizeof(data));
 	//I'm not the one he's talking to
 	if (data[0] != MY_ADDRESS)
 		return;

@@ -25,7 +25,7 @@
 class FloorSensorsClass
 {
 private:
-	void readSensors();
+	//void readSensors();
 public:
 	//thresholds for colors
 	ColorThresholds side_threshold[7];

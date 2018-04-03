@@ -12,9 +12,21 @@ void FloorSensorsMaster::request(void)
 		return;
 	}
 	api_is_busy = true;
-	api_request_tick = millis();
+	api_request_tick = millis(); 
+	switch (color)
+	{
+	case RED:
+		port->write(COLOR_CMD_R);
+		break;
+	case BLUE:
+		port->write(COLOR_CMD_B);
+		break;
+	case WHITE:
+		port->write(COLOR_CMD_W);
+		break;
+	}
 	//Request
-	port->println("RQ");
+	/*port->println("RQ");
 	switch (color)
 	{
 	case RED:
@@ -26,7 +38,7 @@ void FloorSensorsMaster::request(void)
 	case WHITE:
 		port->println("SW");
 		break;
-	}
+	}*/
 	//done
 }
 
@@ -44,7 +56,7 @@ void FloorSensorsMaster::waitForSlave(void)
 	//new data comes
 	api_is_busy = false;
 	byte data[3];
-	uint8_t count = 0;
+	/*uint8_t count = 0;
 	//read data from slave
 	//LOG("[");
 	while (port->available())
@@ -63,6 +75,8 @@ void FloorSensorsMaster::waitForSlave(void)
 		api_waitByte();
 	}
 	//LOGLN("]");
+	*/
+	port->readBytes(data, sizeof(data));
 	api_prox_values = data[0];
 	api_side_analog_values = data[1];
 	api_back_analog_values = data[2];

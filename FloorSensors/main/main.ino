@@ -25,6 +25,11 @@
 #define GREEN	1
 #define BLUE	2
 #define WHITE	3
+
+#define COLOR_CMD_R		10
+#define COLOR_CMD_B		11
+#define COLOR_CMD_W		12
+
 DataContainerClass ms_container;
 
 uint8_t ms_group_idx;
@@ -57,6 +62,8 @@ void setup()
 	MS_PORT.begin(250000);
 	DEBUG_PORT.begin(115200);
 	DEBUG_PORT.setTimeout(100);
+	MS_PORT.setTimeout(5);
+	API_PORT.setTimeout(5);
 	pinMode(LED, OUTPUT);
 	pinMode(COLOR_RED_PIN, OUTPUT);
 	pinMode(COLOR_GREEN_PIN, OUTPUT);
@@ -140,14 +147,14 @@ void handleAPI()
 	api_prox_values = 0;
 	api_back_analog_values = 0;
 	api_side_analog_values = 0;
-	for(uint8_t i = 0; i < 3; i++)
+	for (uint8_t i = 0; i < 3; i++)
 	{
 		if (Floor.front_prox_sensor[i].getState() == 1)
 			bitSet(api_prox_values, i);
 		if (Floor.side_prox_sensor[i].getState() == 1)
 			bitSet(api_prox_values, i + 3);
 	}
-	for(uint8_t i = 0; i < 7; i++)
+	for (uint8_t i = 0; i < 7; i++)
 	{
 		if (Floor.side_analog_sensor[i].getState() == 1)
 			bitSet(api_side_analog_values, i);
@@ -157,15 +164,17 @@ void handleAPI()
 
 	if (!API_PORT.available())
 		return;
-	String indata = "";
+	uint8_t data;
+	/*String indata = "";
 	while (API_PORT.available())
 	{
 		indata += char(API_PORT.read());
 		api_waitByte();
-	}
+	}*/
+	data = API_PORT.read();
 	//LOG(indata);
 	//requesting
-	if (indata.indexOf("RQ") >= 0)
+	/*if (indata.indexOf("RQ") >= 0)
 	{
 		API_PORT.write(api_prox_values);
 		API_PORT.write(api_side_analog_values);
@@ -182,6 +191,21 @@ void handleAPI()
 	if (indata.indexOf("SW") >= 0)
 	{
 		setColor(WHITE);
+	}*/
+	API_PORT.write(api_prox_values);
+	API_PORT.write(api_side_analog_values);
+	API_PORT.write(api_back_analog_values);
+	switch (data)
+	{
+	case COLOR_CMD_R:
+		setColor(RED);
+		break;
+	case COLOR_CMD_B:
+		setColor(BLUE);
+		break;
+	case COLOR_CMD_W:
+		setColor(WHITE);
+		break;
 	}
 	//this secsion just to blink the LED, don't care
 	static uint32_t timer_blink = 0;
@@ -227,10 +251,10 @@ void waitForSlave()
 	//new data comes
 	ms_is_busy = false;
 	byte data[PACKAGE_SIZE];
-	uint8_t count = 0;
+	//uint8_t count = 0;
 	//read data from slave
 	//LOG("[");
-	while (MS_PORT.available())
+	/*while (MS_PORT.available())
 	{
 		if (count > PACKAGE_SIZE)
 		{
@@ -244,7 +268,9 @@ void waitForSlave()
 		//LOG(',');
 		count++;
 		ms_waitByte();
-	}
+	}*/
+	if (MS_PORT.available())
+		MS_PORT.readBytes(data, PACKAGE_SIZE);
 	//LOGLN("]");
 	ms_container.GetDataGroup(ms_group_idx)->SetBytes(data);
 	//parse data
@@ -263,7 +289,7 @@ void waitForSlave()
 	//LOGLN("");
 }
 
-void ms_waitByte()
+/*void ms_waitByte()
 {
 	const uint32_t WAIT_BYTE_TIMEOUT = 100;
 	uint32_t timer_wait = micros();
@@ -293,7 +319,7 @@ void api_waitByte()
 			break;
 		}
 	}
-}
+}*/
 
 void setColor(uint8_t c)
 {

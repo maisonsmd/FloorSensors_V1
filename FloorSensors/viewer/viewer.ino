@@ -57,6 +57,12 @@ void setup()
 	pinMode(CLK_PIN, OUTPUT);
 	pinMode(DAT_PIN, OUTPUT);
 	pinMode(LAT_PIN, OUTPUT);
+
+	digitalWrite(LAT_PIN, LOW);
+	shiftOut(DAT_PIN, CLK_PIN, LSBFIRST, 0);
+	shiftOut(DAT_PIN, CLK_PIN, MSBFIRST, 0);
+	digitalWrite(LAT_PIN, HIGH);
+
 	for (uint8_t i = 0; i < 6; i++)
 	{
 		pinMode(prox_pin[i], OUTPUT);
@@ -117,7 +123,7 @@ void loop()
 		return;
 	timer = millis();*/
 	digitalWrite(LAT_PIN, LOW);
-	shiftOut(DAT_PIN, CLK_PIN, LSBFIRST, FloorSensors.api_back_analog_values << 1);
+	shiftOut(DAT_PIN, CLK_PIN, LSBFIRST, FloorSensors.api_back_analog_values);
 	shiftOut(DAT_PIN, CLK_PIN, MSBFIRST, FloorSensors.api_side_analog_values << 1);
 	digitalWrite(LAT_PIN, HIGH);
 	for (uint8_t i = FL; i <= SB; i++)

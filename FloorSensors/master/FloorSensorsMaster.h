@@ -43,6 +43,10 @@
 #define BLUE 1
 #define WHITE 2
 
+#define COLOR_CMD_R		10
+#define COLOR_CMD_B		11
+#define COLOR_CMD_W		12
+
 class FloorSensorsMaster
 {
 public:
@@ -57,7 +61,7 @@ public:
 
 	uint8_t color = RED;
 
-	void api_waitByte()
+	/*void api_waitByte()
 	{
 		const uint32_t WAIT_BYTE_TIMEOUT = 1000;
 		uint32_t timer_wait = micros();
@@ -71,7 +75,7 @@ public:
 				break;
 			}
 		}
-	}
+	}*/
 
 	void request(void);
 	void waitForSlave(void);
